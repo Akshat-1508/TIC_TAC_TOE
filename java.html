@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>
+            
+public class TIC_TAC_TOE {<br>
+
+    public static void main(String[] args) {<br>
+  
+      char[] board = { '1', '2', '3',<br>
+                       '4', '5', '6',<br>
+                       '7', '8', '9' };<br>
+  
+      var numberOfSquaresPlayed = 0;<br>
+      var whoseTurnItIs = 'x';<br>
+      var gameEndingMessage = "";<br>
+  
+      while (numberOfSquaresPlayed < 9) {<br>
+        printTheBoard(board);<br>
+        getTheUserToSelectTheirSquare(board, whoseTurnItIs);<br>
+    
+        if (theyWonTheGame(board, whoseTurnItIs)) {<br>
+          gameEndingMessage = "You won!!! Congratulations!";<br>
+          break;<br>
+        } else if (numberOfSquaresPlayed == 9) {<br>
+          gameEndingMessage = "A tough battle fought to a draw!";<br>
+        } else {<br>
+          numberOfSquaresPlayed++;<br>
+          whoseTurnItIs = (whoseTurnItIs == 'x') ? 'o' : 'x';<br>
+          continue;<br>
+        }<br>
+      }<br>
+      printTheBoard(board);<br>
+      System.out.println(gameEndingMessage);<br>
+    }<br>
+  
+    private static void printTheBoard(char[] board) {<br>
+      System.out.printf("%n %s | %s | %s %n", board[0], board[1], board[2]);<br>
+      System.out.println(" - + - + - ");<br>
+      System.out.printf(" %s | %s | %s %n",   board[3], board[4], board[5]);<br>
+      System.out.println(" - + - + - ");<br>
+      System.out.printf(" %s | %s | %s %n%n", board[6], board[7], board[8]);<br>
+    }<br>
+  
+    private static void getTheUserToSelectTheirSquare(char[] board, char whoseTurnItIs) {<br>
+  
+      do {<br>
+        try {<br>
+          System.out.printf("Would player %s please choose an unchosen square:", whoseTurnItIs);<br>
+          var scanner = new java.util.Scanner(System.in);<br>
+          var input = scanner.nextInt();<br>
+  
+          if (Character.isDigit(board[input - 1])) {<br>
+            board[input - 1] = whoseTurnItIs;<br>
+            break;<br>
+          } else {<br>
+            System.out.println("Sorry, that's taken.");<br>
+          }<br>
+        } catch (Exception e) {<br>
+          System.out.println("Something went wrong. Let's try that again.");<br>
+        }<br>
+        printTheBoard(board);<br>
+      } while (true);<br>
+    }
+  
+    private static boolean theyWonTheGame(char[] board, char whoseTurnItIs) {<br>
+      return (board[0] + board[1] + board[2] == (whoseTurnItIs * 3)) // first row  <br>
+      || (board[3] + board[4] + board[5] == (whoseTurnItIs * 3))     // second row<br>
+      || (board[6] + board[7] + board[8] == (whoseTurnItIs * 3))     // third row<br>
+      || (board[0] + board[3] + board[6] == (whoseTurnItIs * 3))     // first column<br>
+      || (board[1] + board[4] + board[7] == (whoseTurnItIs * 3))     // second column<br>
+      || (board[2] + board[5] + board[8] == (whoseTurnItIs * 3))     // third column<br>
+      || (board[0] + board[4] + board[8] == (whoseTurnItIs * 3))     // first cross<br>
+      || (board[2] + board[4] + board[6] == (whoseTurnItIs * 3));    // second cross<br>
+    }<br>
+  } <br>
+        </p>
+    </body>
+</html>
